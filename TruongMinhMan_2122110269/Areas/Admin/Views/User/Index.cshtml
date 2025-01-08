@@ -1,0 +1,64 @@
+﻿@model IEnumerable<TruongMinhMan_2122110269.Context.User>
+
+@{
+    ViewBag.Title = "Danh sách người dùng";
+}
+
+<div class="container mt-4">
+    <h2 class="text-center mb-4">Danh sách người dùng</h2>
+
+    <div class="text-end mb-3">
+        <a href="@Url.Action("Create", "User", new { area = "Admin" })" class="btn btn-primary">
+            <i class="bi bi-plus-lg"></i> Thêm người dùng mới
+        </a>
+    </div>
+
+    <table class="table table-bordered table-hover table-striped align-middle">
+        <thead class="table-dark">
+            <tr>
+                <th>Họ</th>
+                <th>Tên</th>
+                <th>Email</th>
+                <th>Mật khẩu</th>
+                <th>Quyền Admin</th>
+                <th class="text-center">Thao tác</th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (Model.Any())
+            {
+                foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@item.FirstName</td>
+                        <td>@item.LastName</td>
+                        <td>@item.Email</td>
+                        <td>
+                            <span class="text-muted">********</span> <!-- Hiển thị mật khẩu ẩn -->
+                        </td>
+                        <td>
+                            @item.IsAdmin
+                        </td>
+                        <td class="text-center">
+                            <a href="@Url.Action("Edit", "User", new { area = "Admin", id = item.Id })" class="btn btn-sm btn-warning">
+                                <i class="bi bi-pencil"></i> Sửa
+                            </a>
+                            <a href="@Url.Action("Details", "User", new { area = "Admin", id = item.Id })" class="btn btn-sm btn-info text-white">
+                                <i class="bi bi-eye"></i> Xem
+                            </a>
+                            <a href="@Url.Action("Delete", "User", new { area = "Admin", id = item.Id })" class="btn btn-sm btn-danger" onclick="return confirm('Bạn có chắc chắn muốn xóa người dùng này?');">
+                                <i class="bi bi-trash"></i> Xóa
+                            </a>
+                        </td>
+                    </tr>
+                }
+            }
+            else
+            {
+                <tr>
+                    <td colspan="6" class="text-center text-muted">Không có người dùng nào.</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

@@ -1,59 +1,62 @@
 ﻿@model IEnumerable<TruongMinhMan_2122110269.Context.Product>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Danh sách sản phẩm";
 }
 
-<h2>Index</h2>
+<div class="container mt-4">
+    <h2 class="text-center mb-4">Danh sách sản phẩm</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Name)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Avatar)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ShortDes)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.FullDescription)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Price)
-        </th>
-        
-        <th></th>
-    </tr>
+    <div class="text-end mb-3">
+        <a href="@Url.Action("Create", "Product", new { area = "Admin" })" class="btn btn-primary">
+            <i class="bi bi-plus-lg"></i> Thêm sản phẩm mới
+        </a>
+    </div>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Name)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Avatar)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ShortDes)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.FullDescription)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Price)
-        </td>
-        
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
-        </td>
-    </tr>
-}
-
-</table>
+    <table class="table table-bordered table-hover table-striped align-middle">
+        <thead class="table-dark">
+            <tr>
+                <th>Tên sản phẩm</th>
+                <th>Hình ảnh</th>
+                <th>Mô tả ngắn</th>
+                <th>Mô tả đầy đủ</th>
+                <th>Giá</th>
+                <th class="text-center">Thao tác</th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (Model.Any())
+            {
+                foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@item.Name</td>
+                        <td>
+                            <img src="@Url.Content("~/Content/images/items/" + item.Avatar)" alt="@item.Name" class="img-thumbnail" style="max-height: 100px; max-width: 100px;" />
+                        </td>
+                        <td>@item.ShortDes</td>
+                        <td>@item.FullDescription</td>
+                        <td>@string.Format("{0:N0} VNĐ", item.Price)</td>
+                        <td class="text-center">
+                            <a href="@Url.Action("Edit", "Product", new { area = "Admin", id = item.Id })" class="btn btn-sm btn-warning">
+                                <i class="bi bi-pencil"></i> Sửa
+                            </a>
+                            <a href="@Url.Action("Details", "Product", new { area = "Admin", id = item.Id })" class="btn btn-sm btn-info text-white">
+                                <i class="bi bi-eye"></i> Xem
+                            </a>
+                            <a href="@Url.Action("Delete", "Product", new { area = "Admin", id = item.Id })" class="btn btn-sm btn-danger" onclick="return confirm('Bạn có chắc chắn muốn xóa sản phẩm này?');">
+                                <i class="bi bi-trash"></i> Xóa
+                            </a>
+                        </td>
+                    </tr>
+                }
+            }
+            else
+            {
+                <tr>
+                    <td colspan="6" class="text-center text-muted">Không có sản phẩm nào.</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

@@ -1,0 +1,54 @@
+﻿@model TruongMinhMan_2122110269.Context.Brand
+
+@{
+    ViewBag.Title = "Chi tiết thương hiệu";
+}
+
+<div class="container mt-5">
+    <div class="card shadow">
+        <div class="card-header bg-primary text-white text-center">
+            <h3>Thông tin chi tiết thương hiệu</h3>
+        </div>
+        <div class="card-body">
+            <div class="row mb-3">
+                <!-- Hiển thị Avatar -->
+                <div class="col-md-4 text-center">
+                    <img src="@Url.Content("~/Content/images/items/" + Model.Avatar)" alt="@Model.Name" class="img-fluid rounded shadow" style="max-height: 300px;">
+                </div>
+
+                <!-- Hiển thị thông tin -->
+                <div class="col-md-8">
+                    <h4 class="text-primary">Tên thương hiệu:</h4>
+                    <p>@Model.Name</p>
+
+                    <h4 class="text-primary">Slug:</h4>
+                    <p>@Model.Slug</p>
+
+                    <h4 class="text-primary">Hiển thị trang chủ:</h4>
+                    <p>@(Model.ShowOnHomePage ?? false ? "Có" : "Không")</p>
+
+                    <h4 class="text-primary">Thứ tự hiển thị:</h4>
+                    <p>@Model.DisplayOrder</p>
+
+                    <h4 class="text-primary">Đã xóa:</h4>
+                    <p>@(Model.Deleted ?? false ? "Có" : "Không")</p>
+
+                    <h4 class="text-primary">Ngày tạo:</h4>
+                    <p>@(Model.CreatedOnUtc?.ToString("dd/MM/yyyy HH:mm") ?? "N/A")</p>
+
+                    <h4 class="text-primary">Ngày cập nhật:</h4>
+                    <p>@(Model.UpdatedOnUtc?.ToString("dd/MM/yyyy HH:mm") ?? "N/A")</p>
+
+                </div>
+            </div>
+        </div>
+        <div class="card-footer text-center">
+            <a href="@Url.Action("Edit", "Brand", new { id = Model.Id })" class="btn btn-warning">
+                <i class="bi bi-pencil"></i> Chỉnh sửa
+            </a>
+            <a href="@Url.Action("Index", "Brand")" class="btn btn-secondary">
+                <i class="bi bi-arrow-left"></i> Quay lại danh sách
+            </a>
+        </div>
+    </div>
+</div>

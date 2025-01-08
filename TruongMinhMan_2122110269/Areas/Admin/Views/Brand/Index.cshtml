@@ -1,0 +1,71 @@
+﻿@model IEnumerable<TruongMinhMan_2122110269.Context.Brand>
+
+@{
+    ViewBag.Title = "Danh sách thương hiệu";
+}
+
+<div class="container mt-4">
+    <h2 class="text-center mb-4">Danh sách thương hiệu</h2>
+
+    <div class="text-end mb-3">
+        <a href="@Url.Action("Create", "Brand", new { area = "Admin" })" class="btn btn-primary">
+            <i class="bi bi-plus-lg"></i> Thêm thương hiệu mới
+        </a>
+    </div>
+
+    <table class="table table-bordered table-hover table-striped align-middle">
+        <thead class="table-dark">
+            <tr>
+                <th>Tên thương hiệu</th>
+                <th>Hình ảnh</th>
+                <th>Slug</th>
+                @*<th>Hiển thị trên trang chủ</th>*@
+                <th>Thứ tự hiển thị</th>
+                <th class="text-center">Thao tác</th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (Model.Any())
+            {
+                foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@item.Name</td>
+                        <td>
+                            <img src="@Url.Content("~/Content/images/items/" + item.Avatar)" alt="@item.Name" class="img-thumbnail" style="max-height: 100px; max-width: 100px;" />
+                        </td>
+                        <td>@item.Slug</td>
+                        @*<td>
+                            @if (item.ShowOnHomePage)
+                            {
+                                <span class="badge bg-success">Hiển thị</span>
+                            }
+                            else
+                            {
+                                <span class="badge bg-secondary">Ẩn</span>
+                            }
+                        </td>*@
+                        <td>@item.DisplayOrder</td>
+                        <td class="text-center">
+                            <a href="@Url.Action("Edit", "Brand", new { area = "Admin", id = item.Id })" class="btn btn-sm btn-warning">
+                                <i class="bi bi-pencil"></i> Sửa
+                            </a>
+                            <a href="@Url.Action("Details", "Brand", new { area = "Admin", id = item.Id })" class="btn btn-sm btn-info text-white">
+                                <i class="bi bi-eye"></i> Xem
+                            </a>
+                            <a href="@Url.Action("Delete", "Brand", new { area = "Admin", id = item.Id })" class="btn btn-sm btn-danger" onclick="return confirm('Bạn có chắc chắn muốn xóa thương hiệu này?');">
+                                <i class="bi bi-trash"></i> Xóa
+                            </a>
+                        </td>
+                    </tr>
+                }
+            }
+            else
+            {
+                <tr>
+                    <td colspan="6" class="text-center text-muted">Không có thương hiệu nào.</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

@@ -1,0 +1,52 @@
+﻿@model TruongMinhMan_2122110269.Context.Category
+
+@{
+    ViewBag.Title = "Create Category";
+}
+
+<h2 class="text-center text-primary mb-4">Create New Category</h2>
+
+@using (Html.BeginForm("Create", "Category", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="card shadow-lg p-4">
+        <h4 class="text-secondary">Category Information</h4>
+        <hr />
+
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+        <div class="row mb-3">
+            <div class="col-md-6">
+                <label class="form-label">@Html.LabelFor(model => model.Name)</label>
+                @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+            </div>
+            <div class="col-md-6">
+                <label class="form-label">@Html.LabelFor(model => model.Avatar)</label>
+                <input type="file" name="ImageUpload" class="form-control" />
+            </div>
+        </div>
+
+        <div class="row mb-3">
+            <div class="col-md-6">
+                <label class="form-label">@Html.LabelFor(model => model.Slug)</label>
+                @Html.EditorFor(model => model.Slug, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Slug, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="row mb-3">
+            <div class="col-md-6">
+                <label class="form-label">@Html.LabelFor(model => model.DisplayOrder)</label>
+                @Html.EditorFor(model => model.DisplayOrder, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.DisplayOrder, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="text-end">
+            <button type="submit" class="btn btn-primary">Create</button>
+            <a href="@Url.Action("Index", "Category")" class="btn btn-secondary">Back to List</a>
+        </div>
+    </div>
+}
