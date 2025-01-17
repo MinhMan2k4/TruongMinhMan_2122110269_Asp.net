@@ -18,7 +18,7 @@ namespace TruongMinhMan_2122110269.Areas.Admin
                 name: "Admin_default",
                 url: "Admin/{controller}/{action}/{id}",
                 defaults: new { action = "Index", id = UrlParameter.Optional },
-                namespaces: new[] { "TruongMinhMan_2122110269.Areas.Admin.Controllers" } // Chỉ định namespace
+                namespaces: new[] { "MinhMan.Areas.Admin.Controllers" } // Chỉ định namespace
             );
         }
     }

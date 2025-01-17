@@ -8,7 +8,7 @@ namespace TruongMinhMan_2122110269.Models
 {
     public class HomeModel
     {
-        public List<Product> ListProduct { get; set; }
+        public List<TruongMinhMan_2122110269.Models.Product> ListProduct { get; set; }
         public List<Category> ListCategory { get; set; }
 
     }

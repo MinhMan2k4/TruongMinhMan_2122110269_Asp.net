@@ -54,5 +54,11 @@ namespace TruongMinhMan_2122110269.Areas.Admin.Controllers
                 return RedirectToAction("Index");
             }
         }
+        [HttpGet]
+        public ActionResult Edit(int id)
+        {
+            var objBrand = objWebsiteBanHangEntities.Brands.Where(n => n.Id == id).FirstOrDefault();
+            return View(objBrand);
+        }
     }
 }

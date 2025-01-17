@@ -1,29 +1,43 @@
 ﻿@model TruongMinhMan_2122110269.Context.User
+
 @{
-    ViewBag.Title = "Login";
+    ViewBag.Title = "Đăng nhập";
 }
 
-<div class="row justify-content-md-center">
-    <div class="col-md-4">
-        <div class="card">
-            <div class="card-header">
-                Login
+<div class="d-flex justify-content-center align-items-center vh-100">
+    <div class="col-md-5 col-lg-4">
+        <div class="card shadow-lg border-0">
+            <div class="card-header bg-primary text-white text-center">
+                <h4 class="mb-0">Đăng nhập</h4>
             </div>
-            <div class="card-body">
+            <div class="card-body p-4">
                 @using (Html.BeginForm("Login", "User", FormMethod.Post))
                 {
                     @Html.AntiForgeryToken()
-                    <div class="form-group">
-                        @Html.LabelFor(m => m.Email)
-                        @Html.TextBoxFor(m => m.Email, "", new { @class = "form-control", @placeholder = "Email" })
 
+                    <div class="form-group mb-3">
+                        @Html.LabelFor(m => m.Email, "Email", new { @class = "form-label fw-bold" })
+                        @Html.TextBoxFor(m => m.Email, new { @class = "form-control", @placeholder = "Nhập email của bạn" })
+                        @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
                     </div>
-                    <div class="form-group">
-                        @Html.LabelFor(m => m.Password)
-                        @Html.PasswordFor(m => m.Password, new { @class = "form-control", @placeholder = "Password" })
+
+                    <div class="form-group mb-4">
+                        @Html.LabelFor(m => m.Password, "Mật khẩu", new { @class = "form-label fw-bold" })
+                        @Html.PasswordFor(m => m.Password, new { @class = "form-control", @placeholder = "Nhập mật khẩu của bạn" })
+                        @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
                     </div>
-                    <div class="form-group">
-                        <input type="submit" name="submit" class="btn btn-primary" value="Login" />
+
+                    <div class="form-group text-center mb-4">
+                        <button type="submit" class="btn btn-primary w-100">
+                            <i class="bi bi-box-arrow-in-right"></i> Đăng nhập
+                        </button>
+                    </div>
+
+                    <div class="text-center">
+                        <small class="text-muted">
+                            Chưa có tài khoản?
+                            <a href="@Url.Action("Register", "User")" class="text-primary fw-bold">Đăng ký ngay</a>
+                        </small>
                     </div>
                 }
             </div>

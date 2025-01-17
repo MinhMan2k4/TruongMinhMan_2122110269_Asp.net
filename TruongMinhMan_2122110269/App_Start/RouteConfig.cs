@@ -17,7 +17,7 @@ namespace TruongMinhMan_2122110269
                 name: "Default",
                 url: "{controller}/{action}/{id}",
                 defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional },
-                namespaces: new[] { "TruongMinhMan_2122110269.Controllers" }
+                namespaces: new[] { "MinhMan.Controllers" }
             );
         }
     }
